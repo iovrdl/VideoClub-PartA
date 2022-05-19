@@ -1,0 +1,70 @@
+﻿@model VideoClub.Web.Models.CreateRentalBindModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Rental</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr/>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Film</label>
+            <div class="col-md-5">
+                @Html.DropDownListFor(model => Model.FilmId, new SelectList(Model.Films, "Id", "Title"), htmlAttributes: new { @class = "form-control", value = Model.FilmId })
+                @Html.ValidationMessageFor(model => model.Films, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Customer</label>
+            <div class="col-md-5">
+                @Html.DropDownListFor(model => Model.UserId, new SelectList(Model.Customers, "Id", "UserName"), htmlAttributes: new { @class = "form-control", value = Model.UserId })
+                @Html.ValidationMessageFor(model => model.Customers, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Rental Date</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.RentalDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", value = Model.RentalDate.ToString("yyyy-MM-dd") })
+                @Html.ValidationMessageFor(model => model.RentalDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Return Date</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.ReturnDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", value = Model.RentalDate.ToString("yyyy-MM-dd") })
+                @Html.ValidationMessageFor(model => model.ReturnDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default"/>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

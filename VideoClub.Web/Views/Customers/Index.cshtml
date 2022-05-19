@@ -1,0 +1,32 @@
+﻿@model IEnumerable<VideoClub.Data.Entities.User>
+
+@{
+    ViewBag.Title = "Customers";
+}
+
+<h2>Customers</h2>
+
+<div class="panel-default">
+    <table class="table">
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>
+                    <div>
+                        @Html.ActionLink("Rent a Film", "Rent", new { id = item.Id }) |
+                        @Html.ActionLink("Unreturned Rentals", "UnreturnedRentals", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

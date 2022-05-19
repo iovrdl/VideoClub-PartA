@@ -1,0 +1,11 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <ul class="nav navbar-nav navbar-left">
+        <li>@Html.ActionLink("Films", "Index", "Films")</li>
+        @if (User.IsInRole("Admin"))
+        {
+            <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
+            <li>@Html.ActionLink("Rentals", "Index", "Rentals")</li>
+        }
+    </ul>
+}

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<VideoClub.Data.Entities.Rental>
+
+@{
+    ViewBag.Title = "Unreturned Rentals";
+}
+
+<h2>Unreturned Rentals</h2>
+
+<div class="panel-default">
+    <table class="table">
+        <tr>
+            <th>Film Title</th>
+            <th>Copy Id</th>
+            <th>Username</th>
+            <th>Rental Date</th>
+            <th>Return Date</th>
+            <th>Note</th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Film.Title</td>
+                <td>@item.CopyId</td>
+                <td>@item.User.UserName</td>
+                <td>@item.RentalDate.ToString("dd-MM-yyyy")</td>
+                <td>@item.ReturnDate.ToString("dd-MM-yyyy")</td>
+                <td>@item.Note</td>
+
+                @if (!item.Returned)
+                {
+                    <td>@Html.ActionLink("Return Film", "Return", new { item.Id })</td>
+                }
+            </tr>
+        }
+    </table>
+</div>
